@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import Quizz from "../components/Quizz/Quizz";
-import { ICate, IQuizCategory } from "../model";
+import { ICate } from "../model";
 import { getAllQuiz, getCategories } from "../service";
-import { randomAnswer } from "../utils";
 import useQuizzStore from "../store/quizzStore";
 
 const difficulty = [
@@ -15,8 +14,6 @@ const Home = () => {
     const [cate, setCate] = useState<ICate[]>([]);
     const [cateId, setCateId] = useState("");
     const [diff, setDiff] = useState("");
-    const [quiz, setQuiz] = useState<IQuizCategory[]>([]);
-
     const setQuizz = useQuizzStore((state) => state.setQuizz);
 
     useEffect(() => {
@@ -27,28 +24,11 @@ const Home = () => {
             .catch(() => null);
     }, []);
 
-    useEffect(() => {
-        if (quiz.length > 0) {
-            const newQ = quiz.map((item) => {
-                const answer = [...item.incorrect_answers, item.correct_answer];
-                const randAnswer = randomAnswer(answer);
-                return {
-                    ...item,
-                    answers: randAnswer,
-                    chosenAnswer: "",
-                };
-            });
-            setQuizz(newQ);
-        }
-    }, [quiz]);
-
     const handleSubmit = () => {
         if (cateId && diff) {
             getAllQuiz(cateId, diff)
-                .then((res) => {
-                    if (res?.results && res.results.length > 0) {
-                        setQuiz(res.results);
-                    }
+                .then((data) => {
+                    setQuizz(data);
                 })
                 .catch(() => null);
         }

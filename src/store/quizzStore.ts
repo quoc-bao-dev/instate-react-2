@@ -10,9 +10,9 @@ interface QuizzState {
 const useQuizzStore = create<QuizzState>()((set) => ({
     quizz: [],
     setQuizz: (quizzs: IQuizCategory[]) => {
-        set((state) => ({
+        set({
             quizz: quizzs,
-        }));
+        });
     },
     choice: (answer: string, question: string) => {
         set((state) => {
