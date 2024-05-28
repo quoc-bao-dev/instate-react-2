@@ -20,9 +20,11 @@ const Home = () => {
     const setQuizz = useQuizzStore((state) => state.setQuizz);
 
     useEffect(() => {
-        getCategories().then((res) => {
-            setCate(res.trivia_categories);
-        });
+        getCategories()
+            .then((res) => {
+                setCate(res.trivia_categories);
+            })
+            .catch(() => null);
     }, []);
 
     useEffect(() => {
@@ -42,11 +44,13 @@ const Home = () => {
 
     const handleSubmit = () => {
         if (cateId && diff) {
-            getAllQuiz(cateId, diff).then((res) => {
-                if (res?.results && res.results.length > 0) {
-                    setQuiz(res.results);
-                }
-            });
+            getAllQuiz(cateId, diff)
+                .then((res) => {
+                    if (res?.results && res.results.length > 0) {
+                        setQuiz(res.results);
+                    }
+                })
+                .catch(() => null);
         }
     };
     return (

@@ -9,8 +9,6 @@ const Quizz = () => {
     const choice = useQuizzStore((state) => state.choice);
     const nav = useNavigate();
 
-    console.log("quizz render");
-
     return (
         <div className="pb-8">
             {data.map((item) => (
