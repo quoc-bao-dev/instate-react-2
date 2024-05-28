@@ -65,12 +65,12 @@ const ResultCpm = () => {
                             correct <= 1
                                 ? "bg-red-500"
                                 : correct <= 3
-                                ? "bg-orange-500"
+                                ? "bg-yellow-500"
                                 : "bg-green-500"
                         }`
                     )}
                 >
-                    You got {correct} / {data.length}
+                    You scored {correct} out of {data.length}
                 </div>
             </div>
             <div className="py-4">

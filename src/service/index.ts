@@ -5,7 +5,7 @@ export const getCategories = async () => {
         const res = await axios.get("https://opentdb.com/api_category.php");
         return res.data;
     } catch (error) {
-        console.warn(error);
+        throw error;
     }
 };
 
@@ -16,6 +16,6 @@ export const getAllQuiz = async (cateId: string, diff: string) => {
         );
         return res.data;
     } catch (error) {
-        console.warn(error);
+        throw error;
     }
 };
